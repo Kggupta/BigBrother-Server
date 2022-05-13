@@ -1,0 +1,6 @@
+node_modules/
+config.env
+package-lock.json
+server/analytic-engine/
+PatreonEndPoints.js
+server/stocks/Predictor.js
