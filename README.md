@@ -2,7 +2,7 @@
 
 ## Overview
 
-View (the demo repository)[https://github.com/Kggupta/BigBrother-Demo] for more information about this project. 
+View [the demo repository](https://github.com/Kggupta/BigBrother-Demo) for more information about this project. 
 
 This is a small sample of what the project's REST API looks like. 
 
