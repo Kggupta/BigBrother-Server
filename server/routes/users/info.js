@@ -10,7 +10,6 @@ const PARAMS = [ {endp: 'name', param: 'shackName'},
 
 PARAMS.forEach(param => {
     recordRoutes.route('/user/:id/'+param.endp).get(async function (req, res) {
-        console.log(param.param)
         try {
             const data = await getUser(req.params.id, param.param || param.endp);
     

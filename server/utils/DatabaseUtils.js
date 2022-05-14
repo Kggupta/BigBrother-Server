@@ -17,7 +17,7 @@ async function getDocument(collection, id, param) {
             .findOne({franchiseKey:id})
             break;
         default:
-            await dbConnect
+            document = await dbConnect
             .collection(collection)
             .findOne({id})
             break;
