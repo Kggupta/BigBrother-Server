@@ -1,4 +1,4 @@
-# BigBrother Node Server
+# Big Brother Node Server
 
 ## Overview
 
