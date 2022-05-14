@@ -1,6 +1,27 @@
 const express = require('express');
-const {getUser} = require('../../utils/UserUtils.js')
+const {getUser} = require('../../utils/DatabaseUtils.js')
 const recordRoutes = express.Router();
+const PARAMS = [ {endp: 'name', param: 'shackName'}, 
+                 {endp: 'donator', param: 'donatorStatus'},
+                 {endp: 'tokens', param: 'snapShotTokens'},
+                 {endp: 'dm', param: 'dmremind'},
+                 {endp: 'snapshots', param: 'snaps'},
+               ]
+
+PARAMS.forEach(param => {
+    recordRoutes.route('/user/:id/'+param.endp).get(async function (req, res) {
+        console.log(param.param)
+        try {
+            const data = await getUser(req.params.id, param.param || param.endp);
+    
+            res.status(200).json(data);
+        }catch (err) {
+            console.log(err)
+            res.status(404).send(err.message)
+        }
+    })
+})
+
 
 recordRoutes.route('/user/:id/items/:location').get(async function (req, res) {
     let location;
@@ -24,46 +45,6 @@ recordRoutes.route('/user/:id/items/:location').get(async function (req, res) {
     }
 });
 
-recordRoutes.route('/user/:id/name').get(async function (req, res) {
-    try {
-        const name = await getUser(req.params.id, "shackName");
-        res.json(name)
-    }catch (err) {
-        console.log(err)
-        res.status(404).send(err.message)
-    }
-});
-
-recordRoutes.route('/user/:id/donator').get(async function (req, res) {
-    try {
-        const donator = await getUser(req.params.id, "donatorStatus");
-        res.json(donator)
-    }catch (err) {
-        console.log(err)
-        res.status(404).send(err.message)
-    }
-});
-
-recordRoutes.route('/user/:id/tokens').get(async function (req, res) {
-    try {
-        const tokens = await getUser(req.params.id, "snapShotTokens");
-        res.json(tokens)
-    }catch (err) {
-        console.log(err)
-        res.status(404).send(err.message)
-    }
-});
-
-recordRoutes.route('/user/:id/dm').get(async function (req, res) {
-    try {
-        const dm = await getUser(req.params.id, "dmremind");
-        res.json(dm)
-    }catch (err) {
-        console.log(err)
-        res.status(404).send(err.message)
-    }
-});
-
 
 recordRoutes.route('/user/:id/streak').get(async function (req, res) {
     try {
@@ -73,17 +54,6 @@ recordRoutes.route('/user/:id/streak').get(async function (req, res) {
             res.json(streak);
         else
             res.json(user["streak"])
-    }catch (err) {
-        console.log(err)
-        res.status(404).send(err.message)
-    }
-});
-
-
-recordRoutes.route('/user/:id/snapshots').get(async function (req, res) {
-    try {
-        const snaps = await getUser(req.params.id, "snaps");
-        res.json(snaps)
     }catch (err) {
         console.log(err)
         res.status(404).send(err.message)

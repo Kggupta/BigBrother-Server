@@ -1,5 +1,5 @@
 const express = require('express');
-const {getUser, deleteUser, updateUser} = require('../../utils/UserUtils.js')
+const {getUser, deleteUser, updateUser} = require('../../utils/DatabaseUtils.js')
 const RANKS = ["Gordon", "None", "Executive", "Head", "Sous", "Apprentice"]
 const TWELVE_HOURS = 43200000;
 const recordRoutes = express.Router();
